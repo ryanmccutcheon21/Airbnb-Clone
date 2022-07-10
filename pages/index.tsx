@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import Header from '../components/Header'
+import Header from '../components/header'
 import Banner from '../components/banner'
 import SmallCard from '../components/SmallCard'
 import MediumCard from '../components/MediumCard'

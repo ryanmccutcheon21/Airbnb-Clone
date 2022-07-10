@@ -6,6 +6,7 @@ import Banner from '../components/banner'
 import SmallCard from '../components/SmallCard'
 import MediumCard from '../components/MediumCard'
 import LargeCard from '../components/LargeCard'
+import Footer from '../components/Footer'
 
 const Home: NextPage = ({ exploreData, cardsData }) => {
   return (
@@ -51,6 +52,7 @@ const Home: NextPage = ({ exploreData, cardsData }) => {
           buttonText='Get Inspired'
         />
       </main>
+      <Footer />
     </div>
   )
 }

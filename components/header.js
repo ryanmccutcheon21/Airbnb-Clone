@@ -12,7 +12,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
 import { useRouter } from 'next/dist/client/router'; // so we can route to different pages on site
 
-function Header() {
+function Header({ placeholder }) {
     const [searchInput, setSearchInput] = useState("");
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
@@ -34,8 +34,23 @@ function Header() {
     }
 
     // Create function to send user to search page
+    // Use object in push function to add search parameters to the URL
+    // so when sending URL to someone it will show with the queries they
+    // search on that site
+    // pathname is needed and sends to /search page
+    // query object has query values you want passed into URL
+    // URL example with this function
+    // 
     const search = () => {
-        router.push('/search')
+        router.push({
+            pathname: '/search',
+            query: {
+                location: searchInput,
+                startDate: startDate.toISOString(),
+                endDate: endDate.toISOString(),
+                numOfGuests
+            }
+        })
     }
 
     return (
@@ -57,7 +72,7 @@ function Header() {
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
                     type='text'
-                    placeholder='Start your search'
+                    placeholder={placeholder || 'Start your search'}
                     className='pl-5 bg-transparent outline-none flex-grow text-sm text-gray-600 placeholder-gray-400'
                 />
                 <SearchIcon

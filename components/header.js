@@ -10,12 +10,14 @@ import { useState } from 'react';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
+import { useRouter } from 'next/dist/client/router'; // so we can route to different pages on site
 
 function Header() {
     const [searchInput, setSearchInput] = useState("");
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [numOfGuests, setNumOfGuests] = useState(1);
+    const router = useRouter(); // create router variable
 
     const selectionRange = {
         startDate,
@@ -31,10 +33,16 @@ function Header() {
         setSearchInput('')
     }
 
+    // Create function to send user to search page
+    const search = () => {
+        router.push('/search')
+    }
+
     return (
         <header className='sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10'>
             {/* Left */}
-            <div className='relative flex items-center h-10 cursor-pointer my-auto'>
+            {/* use router const and .push method to return user to homempage when clicked */}
+            <div onClick={() => router.push('/')} className='relative flex items-center h-10 cursor-pointer my-auto'>
                 <Image
                     src='https://links.papareact.com/qd3'
                     layout='fill'
@@ -86,7 +94,8 @@ function Header() {
                     </div>
                     <div className='flex'>
                         <button onClick={resetInput} className='flex-grow text-gray-500'>Cancel</button>
-                        <button className='flex-grow text-red-400'>Search</button>
+                        <button onClick={search} className='flex-grow text-red-400'>Search</button>
+                        {/* using search function to route to search page on click */}
                     </div>
                 </div>
             )}

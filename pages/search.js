@@ -2,10 +2,15 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { useRouter } from 'next/router'
 import { format } from 'date-fns'
+import InfoCard from '../components/InfoCard';
 
-function Search() {
+
+// adding props from server
+function Search({ searchResults }) {
+    // console.log(searchResults)
+
     const router = useRouter();
-    console.log(router.query)
+    // console.log(router.query)
     // shows our search router.push object from Header.js and what we
     // can pull from that object to show on the page
 
@@ -35,6 +40,22 @@ function Search() {
                         <p className='px-4 py-2 border rounded-full cursor-pointer hover: shadow-lg active:scale-95 active:bg-gray-100 transition transform duration-100 ease-out;'>Rooms and Beds</p>
                         <p className='px-4 py-2 border rounded-full cursor-pointer hover: shadow-lg active:scale-95 active:bg-gray-100 transition transform duration-100 ease-out;'>More filters</p>
                     </div>
+                    <div className='flex flex-col'>
+                        {searchResults.map(({ img, location, title, description, star, price, total }) => (
+                            <InfoCard
+                                // should have unique ID for key but just example
+                                // need key when mapping through array with map
+                                key={img}
+                                img={img}
+                                location={location}
+                                title={title}
+                                description={description}
+                                star={star}
+                                price={price}
+                                total={total}
+                            />
+                        ))}
+                    </div>
                 </section>
             </main>
             <Footer />
@@ -43,3 +64,19 @@ function Search() {
 }
 
 export default Search
+
+// if want to take project further and connect to an API and use
+// query parameters to get results you can use
+// getServerSideProps(context) to pull that data from the page to the server
+// use fetch to get response and pull the JSON using .json() method
+export async function getServerSideProps() {
+    const searchResults = await fetch('https://links.papareact.com/isz').then(res => res.json())
+    // return info onto page
+    // use props: and an object with values you want to pull onto page
+    // go up to top Search() function and add the props 
+    return {
+        props: {
+            searchResults
+        }
+    }
+}

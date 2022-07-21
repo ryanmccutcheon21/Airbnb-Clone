@@ -8,6 +8,16 @@ import Map from '../components/Map'
 
 // adding props from server
 function Search({ searchResults }) {
+
+    // Want to add feature where heart turns red once clicked
+
+
+    // console.log(document.body.querySelector('.heart-icon'))
+    // const heartToRed = document.body.querySelector('.heart-icon')
+    // heartToRed.addEventListener('click', () => {
+    //     heartToRed.style.fill = 'red'
+    // })
+
     // console.log(searchResults)
 
     const router = useRouter();

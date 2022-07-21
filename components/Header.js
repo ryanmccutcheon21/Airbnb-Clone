@@ -63,6 +63,7 @@ function Header({ placeholder }) {
                     layout='fill'
                     objectFit='contain'
                     objectPosition='left'
+                    alt="header"
                 />
             </div>
             {/* Middle - Search */}

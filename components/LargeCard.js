@@ -9,6 +9,7 @@ function LargeCard({ img, title, description, buttonText }) {
                     layout='fill'
                     objectFit='cover'
                     className='rounded-2xl'
+                    alt="airbnb stay main picture"
                 />
             </div>
 
